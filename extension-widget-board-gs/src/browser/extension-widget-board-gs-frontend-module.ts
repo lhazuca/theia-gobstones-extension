@@ -4,6 +4,9 @@ import { ExtensionWidgetBoardGsContribution } from './extension-widget-board-gs-
 import { bindViewContribution, FrontendApplicationContribution, WidgetFactory } from '@theia/core/lib/browser';
 
 import '../../src/browser/style/index.css';
+import {CommandContribution, MenuContribution} from "@theia/core";
+import {ReadActiveEditorCommandContribution} from "./ReadActiveEditorCommandContribution";
+import {ReadActiveEditorMenuContribution} from "./ReadActiveEditorMenuContribution";
 
 export default new ContainerModule(bind => {
     bindViewContribution(bind, ExtensionWidgetBoardGsContribution);
@@ -13,4 +16,7 @@ export default new ContainerModule(bind => {
         id: ExtensionWidgetBoardGsWidget.ID,
         createWidget: () => ctx.container.get<ExtensionWidgetBoardGsWidget>(ExtensionWidgetBoardGsWidget)
     })).inSingletonScope();
+
+    bind(CommandContribution).to(ReadActiveEditorCommandContribution)
+    bind(MenuContribution).to(ReadActiveEditorMenuContribution)
 });
